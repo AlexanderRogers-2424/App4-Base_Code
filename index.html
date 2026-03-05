@@ -7,43 +7,74 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
+Alex Rogers
  
 Further Information:
-http://diystream.cns.utexas.edu/
-
+http://cns.utexas.edu/fri
+ 
 Research Educator:
 Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-blah, blah, blah,
+The goal of the code is to allow someone to distinguish whether they have a migraine or a tension headache. This would allow them to easily diagnose and treat themselves acordingly.
  
 Known Issues:
-blah, blah, blah, blah
-Ignore this error message if you see it using the javaScript console: Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
+There are several known issues with the notion of diagnosis in general. People frequently misconstrue various symptoms with illnesses that inevitably become destrimental for patients. This code seeks to generate an effective diagnosis site for patients and reduce these issues.
 
-References:
 https://www.w3schools.com/w3css/default.asp
 https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
 -->
-	
-<head> 
-	<title>Hello World</title>  
-]	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<link rel="stylesheet" href="w3.css">
-	<link rel="stylesheet" href="w3-colors-flat.css">
-</head> 
+
+   <head> 
+      <title>Migraine or Tension Headache App</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" href="w3.css">
+      <link rel="stylesheet" href="w3-colors-flat.css">
+   </head> 
+
 
 <script>
+		// These variables store responses supporting them//
+		// migraine or a tension headache//
+		// This code also indicates how many questions are present//
+	var totalQuestions =6;
+        var allergy_count = 0;
+        var cold_count = 0;
 
-	//YOUR JAVASCRIPT GOES HERE
+		// This code is active and increases the allergy count by 1 when a user selects an allergy-based answer//
+        function allergyAdd(){
+            allergy_count = allergy_count + 1;
 
-</script>	
+        }
+
+		// This code is active and increases the cold count by 1 when a user selects a cold-based answer//
+        function coldAdd(){
+            cold_count = cold_count + 1;
+        }
+
+		// This code calculates the percentages//
+		// also presents them on the results page at the end by establishing the result text as an ID that will trigger the results//
+		function calculateResults(){
+			//Calculates allergy percentage//
+			var allergyPercent = (allergy_count / totalQuestions) * 100;
+			//Calculates cold percentage//
+			var coldPercent = (cold_count / totalQuestions) * 100;
+			
+			var totalPercent = allergy_count + cold_count;
+			//This code allows Javascript to modify what is shown on the page//
+			var resultsText = document.getElementById("resultsText");
+		//This code generates the content of the results by setting the formula used//
+			resultsText.innerHTML = 
+				"Probability it is Allergies: " + allergyPercent + "% <br>" + 
+				"Probability it is a Cold: " + coldPercent + "%";
+		}
+
+  </script>
 
 
-<!-- THIS STYLE CODE HELPS MAKE YOUR APP LOOK GOOD. PROBABLY DONT MESS WITH IT -->
+
 <style>	
 .body {
      margin: 0em;
@@ -67,9 +98,136 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 </style>
 
 <body>
+<!-this code sets up the first page with a color and a name-->
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Cold or Allergies?</h1>
+</div>
+<!-this code sets an introduction and the button directs it to the first question-->
+<div id="content" class="w3-container">
+	<p>Are you feeling like you might have a cold but wonder if it is allergies. Answer a few short questions to find out!</p>
 	
-	<!-- HERE IS WHERE ALL OF YOUR HTML PAGES GO -->
-	REPLACE THIS TEXT
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
 	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+<!-this code is closed-->
+	
+</div> <!-- adding this because it seems to be missing????? -->
+	
+<!-this code opens a new page with question 1-->
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Is your headache throbbing or pulsing</p> <!-- Question 1 --> 
+	</div>
+		<a href="#two" onclick="allergyAdd()" class="w3-btn w3-green w3-round">Yes</a> <!-- Yes increases allergy count -->
+		<a href="#two" onclick="coldAdd()" class="w3-btn w3-red w3-round">No</a> <!-- No increases in cold count-->
+		
+    	</div>
+</div>
+<!-- Code is closed -->
+
+<!-- This code is for question 2 and opens a new page -->
+<div class="page" id="two">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Do you feel tight pressure around your head?</p> <!--Question 2-->
+	</div>
+		<a href="#three" onclick="coldAdd()" class="w3-btn w3-green w3-round">Yes</a> <!-- Yes fever is present -->
+		<a href="#three" onclick="allergyAdd()" class="w3-btn w3-red w3-round">No</a> <!-- No fever is not present -->
+	</div>
+</div>	
+<!-- Code is closed -->
+
+<!-- This code is for question 3 and opens a new page -->
+<div class="page" id="three">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+
+	<div id="content" class="w3-container">
+		<p>Are you sensitive to light or sound?</p> <!--Question 3-->
+	</div>
+		<a href="#four" onclick="coldAdd()" class="w3-btn w3-green w3-round">Yes</a> <!-- Yes sore throat is present -->
+		<a href="#four" onclick="allergyAdd()" class="w3-btn w3-red w3-round">No</a> <!-- No sore throat is not present -->
+	</div>
+</div>
+<!-- Code is closed -->
+
+<!-- This code is for question 4 and opens a new page -->
+<div class="page" id="four">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Do you have neck or shoulder tightness?</p> <!--Question 4-->
+	</div>
+		<a href="#five" onclick="allergyAdd()" class="w3-btn w3-green w3-round">Yes</a> <!-- Yes allergies are seasonal pointing to allergy-->
+		<a href="#five" onclick="coldAdd()" class="w3-btn w3-red w3-round">No</a> <!-- No allergies are not seasonal pointing to cold-->
+	</div>
+</div>
+<!-- This code is closed -->
+	
+<!-- This code is for question 5 and opens a new page -->
+<div class="page" id="five">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Is the pain mostly on one side of your head?</p> <!--Question 5-->
+	</div>
+		<a href="#six" onclick="allergyAdd()" class="w3-btn w3-green w3-round">Yes</a> <!-- Yes symptoms improve with antihistamine -->
+		<a href="#six" onclick="coldAdd()" class="w3-btn w3-red w3-round">No</a> <!-- No they do not improve with antihistamine -->
+	</div>
+</div>
+<!-- This code is closed -->
+
+<!-- This code is for question 6 and opens a new page -->
+	<div class="page" id="six">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 6</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Is the pain steady rather than pounding?</p> <!--Question 6-->
+	</div>
+		<a href="#resultsPage" onclick="coldAdd()" class="w3-btn w3-green w3-round">Yes</a> <!-- Yes they have body aches -->
+		<a href="#resultsPage" onclick="allergyAdd()" class="w3-btn w3-red w3-round">No</a> <!-- No they do not have body aches -->
+	</div>
+</div>
+<!-- This code is closed -->
+
+<!-- This code adds a new page and a results page -->
+<div class="page" id="resultsPage">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Your Results</h1>
+	</div>
+
+	<div class="w3-container">
+		<button onclick="calculateResults()" class="w3-btn w3-blue w3-round">
+			Calculate Results
+		</button> <!-- This creates the clickable button/runs the fucntion to calculate the results -->
+		
+		<!-- This paragraph is filled by JavaScript-->
+		<p id="resultsText"></p>
+	</div>
+</div>
+<!-- This code is closed -->
+	
+<!-- This code ads a footer -->
+<footer class="w3-bottom w3-container w3-flat-carrot">
+	<p>DIY!</p>
+</footer>
+
 </body>
 </html>
+<!-- This code is closed -->
